@@ -1,2 +1,2 @@
-# csc381-c-
+# csc381-c++
 Advanced C++ @ Queens College

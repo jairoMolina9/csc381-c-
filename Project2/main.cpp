@@ -23,12 +23,12 @@ Matrix<T> Multiply(Matrix<T> a, Matrix<T> b) {
 					tmp += a[i][z] * b[z][j];
 				}
 				else if (a.getSAlow() > 0 && b.getSAlow() == 0) {                               // m used Matrix(x1,y1,x2,y2) and m_b used Matrix(x,y)
-					tmp += a[i][z + a.getSAlow()] * b[z][j];
+					tmp += a[i + a.getLow()][z + a.getSAlow()] * b[z][j];
 				}
 				else if (a.getSAlow() == 0 && b.getSAlow() > 0) {                               // m used Matrix(x,y) and m_b used Matrix(x1,y1,x2,y2)
-					tmp += a[i][z] * b[z][j + b.getSAlow()];
+					tmp += a[i][z] * b[z + b.getLow()][j + b.getSAlow()];
 				}
-				else {                                                                    // m and m_b used Matrix(x1,y1,x2,y2)
+				else {                                                                    	// m and m_b used Matrix(x1,y1,x2,y2)
 					tmp += a[i + a.getLow()][z + a.getSAlow()] * b[z + b.getLow()][j + b.getSAlow()];
 				}
 			}
@@ -58,5 +58,6 @@ int main() {
 	Matrix<int> m3 = Multiply(m, m2);
 	//Matrix<int> m4 = m * m2;
 	cout << m3;
+	
 	return 0;
 }

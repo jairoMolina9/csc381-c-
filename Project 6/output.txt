@@ -1,0 +1,48 @@
+Regular A: 1 1 1 2 1 3
+Regular B: 2 1 2 2
+Canonical A: 1 3 1 2 1 1
+Canonical B: 2 2 2 1
+sum: 1 3 3 2 3 1 
+diff: 1 3 -1 2 -1 1 
+multiply: 2 5 4 4 4 3 2 2 
+
+Regular A: 1 1 2 2 3 3 1 1
+Regular B: 2 2 1 1 1 2
+Canonical A: 3 3 2 2 2 1
+Canonical B: 3 2 1 1
+sum: 3 3 5 2 3 1 
+diff: 3 3 -1 2 1 1 
+multiply: 9 5 9 4 8 3 2 2 
+
+Regular A: -1 3 -4 2
+Regular B: 1 4 2 1
+Canonical A: -1 3 -4 2
+Canonical B: 1 4 2 1
+sum: 1 4 -1 3 -4 2 2 1 
+diff: -1 4 -1 3 -4 2 -2 1 
+multiply: -1 7 -4 6 -2 4 -8 3 
+
+Regular A: -1 2 1 2 1 3
+Regular B: 1 1 2 2
+Canonical A: 1 3
+Canonical B: 2 2 1 1
+sum: 1 3 2 2 1 1 
+diff: 1 3 -2 2 -1 1 
+multiply: 2 5 1 4 
+
+Regular A: 1 0
+Regular B: 5 0
+Canonical A: 1 
+Canonical B: 5 
+sum: 6 
+diff: -4 
+multiply: 5 
+
+Regular A: 1 1 2 2
+Regular B: 1 1 2 2
+Canonical A: 2 2 1 1
+Canonical B: 2 2 1 1
+sum: 4 2 2 1 
+diff: 0
+multiply: 4 4 4 3 1 2 
+

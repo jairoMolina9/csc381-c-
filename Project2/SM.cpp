@@ -1,7 +1,7 @@
 #include "SafeArray.cpp"
 
 template <class T> 
-class Matrix {
+class SM {
 private:
 	int low_, high_, sa_low_, sa_high_;
 	SA<T>* matrix_;
@@ -11,7 +11,7 @@ public:
 	// default constructor
 	// allows for writing  Matrix a;
 
-	Matrix() {
+	SM() {
 		low_ = sa_low_ = 0;
 		high_ = sa_high_ = -1;
 		matrix_ = NULL;
@@ -20,7 +20,7 @@ public:
 	// 2 parameter constructor let us write
 	// Matrix x(0,2);
 
-	Matrix(int row, int col) {
+	SM(int row, int col) {
 		if (row <= 0 || col <= 0)
 		{
 			cout << "constructor error - invalid bounds" << endl;
@@ -40,7 +40,7 @@ public:
 	// 4 parameter constructor let us write
 	// Matrix x(0,2,0,2);
 
-	Matrix(int low, int high, int sa_low, int sa_high) {
+	SM(int low, int high, int sa_low, int sa_high) {
 		if ((high - low + 1) <= 0 || (sa_high - sa_low) + 1 <= 0)
 		{
 			cout << "constructor error - invalid bounds";
@@ -62,7 +62,7 @@ public:
 	// copy constructor for pass by value
 	// and intialization
 
-	Matrix(const Matrix& m) {
+	SM(const SM& m) {
 		size_t size = m.high_ - m.low_ + 1;
 
 		matrix_ = new SA<T>[size];
@@ -77,7 +77,7 @@ public:
 
 	// destructor
 
-	~Matrix() {
+	~SM() {
 		delete[] matrix_;
 		matrix_ = NULL; // avoid dangling pointer
 	}
@@ -96,7 +96,7 @@ public:
 	// overloaded = let us assign
 	// one Matrix to another
 
-	Matrix& operator=(const Matrix& m) {
+	SM& operator=(const SM& m) {
 		if (this == &m) return *this;
 		
 		delete[] matrix_;
@@ -113,44 +113,7 @@ public:
 		return *this;
 	}
 
-	// overloaded * let us assign
-	// Matrix c = a * b; //a,b are Matrix objects
-
-	Matrix operator*(const Matrix& m_b) {
-		size_t a_row = this->high_ - this->low_ + 1;
-		size_t a_col = this->sa_high_ - this->sa_low_ + 1;
-		size_t b_row = m_b.high_ - m_b.low_ + 1;
-		size_t b_col = m_b.sa_high_ - m_b.sa_low_ + 1;
-
-		if (a_col != b_row) {
-			cout << "Matrix A column != Matrix B column" << endl;
-			exit(1);
-		}
-
-		Matrix<T> r(a_row, b_col);
-
-		for (int i = 0; i < a_row; i++) {
-			for (int j = 0; j < b_col; j++) {
-				int tmp = 0;
-				for (int z = 0; z < b_row; z++) {
-					if (sa_low_ == 0 && m_b.sa_low_ == 0) {                                   // m used Matrix(x,y) and m_b used Matrix(x,y)
-						tmp += matrix_[i][z] * m_b.matrix_[z][j];
-					}
-					else if (sa_low_ > 0 && m_b.sa_low_ == 0) {                               // m used Matrix(x1,y1,x2,y2) and m_b used Matrix(x,y)
-						tmp += matrix_[i][z + sa_low_] * m_b.matrix_[z][j];
-					}
-					else if (sa_low_ == 0 && m_b.sa_low_ > 0) {                               // m used Matrix(x,y) and m_b used Matrix(x1,y1,x2,y2)
-						tmp += matrix_[i][z] * m_b.matrix_[z][j + m_b.sa_low_];
-					}
-					else {                                                                    // m and m_b used Matrix(x1,y1,x2,y2)
-						tmp += matrix_[i][z + sa_low_] * m_b.matrix_[z][j + m_b.sa_low_];
-					}
-				}
-				r[i][j] = tmp;
-			}
-		}
-		return r;
-	}
+	// getter functions
 
 	int getHigh() { return high_; }
 	int getLow() { return low_; }
@@ -159,12 +122,11 @@ public:
 
 	// overloads << so we can directly print Matrix
 
-	friend ostream& operator<< <T> (ostream& os, Matrix<T> m);
+	friend ostream& operator<<(ostream& os, SM<T> m) {
+		int size = m.high_ - m.low_ + 1;
+		for (size_t i = 0; i < size; i++)
+			cout << m.matrix_[i] << endl;
+		
+		return os;
+	}
 };
-
-template <class T> ostream& operator<< (ostream& os, Matrix<T> m) {
-	int size = m.high_ - m.low_ + 1;
-	for (size_t i = 0; i < size; i++)
-		cout << m.matrix_[i] << endl;
-	return os;
-}

@@ -86,12 +86,10 @@ public:
 
 	// overloads << so we can directly print SAs
 
-	friend ostream& operator<< <T>(ostream& os, SA<T> s);
-};
-
-template <class T> ostream& operator<<(ostream& os, SA<T> s) {
+	friend ostream& operator<<(ostream& os, SA<T> s) {
 	int size = s.high - s.low + 1;
 	for (int i = 0; i < size; i++)
 		cout << s.p[i] << " ";
 	return os;
+	}
 };
